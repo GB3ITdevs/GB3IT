@@ -1,0 +1,119 @@
+DROP DATABASE IF EXISTS ThankYou;
+
+CREATE DATABASE ThankYou;
+
+USE ThankYou;
+
+
+
+CREATE TABLE
+GeneralInfo
+(
+        infoID INT NOT NULL AUTO_INCREMENT,
+        firstName VARCHAR(30) NOT NULL,
+        lastName VARCHAR(30) NOT NULL,
+        password VARCHAR(40) NOT NULL,
+        email VARCHAR(200) NOT NULL,
+        PRIMARY KEY ( infoID )
+)ENGINE=INNODB;
+
+CREATE TABLE
+Community
+(
+	postalCode INT NOT NULL AUTO_INCREMENT,
+	communityName VARCHAR(200),
+	PRIMARY KEY ( postalCode )
+)ENGINE=INNODB;
+
+CREATE TABLE
+ContactInfo
+(
+	contactID INT NOT NULL AUTO_INCREMENT,
+	postalCode INT NOT NULL,
+	suburb VARCHAR(100) NOT NULL,
+	city VARCHAR(100) NOT NULL,
+	streetNumber INT NOT NULL,
+	street VARCHAR(200) NOT NULL,
+	PRIMARY KEY ( contactID ),
+	FOREIGN KEY ( postalCode ) REFERENCES Community (postalCode)
+)ENGINE=INNODB;
+
+CREATE TABLE
+Administrator
+(
+	adminID INT NOT NULL AUTO_INCREMENT,
+	infoID INT NOT NULL,
+	PRIMARY KEY ( adminID ),
+	FOREIGN KEY ( infoID )  REFERENCES GeneralInfo (infoID)
+)ENGINE=INNODB;
+
+CREATE TABLE
+User
+(
+	userID INT NOT NULL AUTO_INCREMENT,
+	infoID INT NOT NULL,
+	contactID INT NOT NULL,
+	PRIMARY KEY ( userID ),
+	FOREIGN KEY ( infoID ) REFERENCES GeneralInfo (infoID),
+	FOREIGN KEY ( contactID ) REFERENCES ContactInfo (contactID)
+)ENGINE=INNODB;
+
+CREATE TABLE
+PhoneNumber
+(
+	phoneID INT NOT NULL AUTO_INCREMENT,
+	infoID INT NOT NULL,
+	phoneNumber INT NOT NULL,
+	PRIMARY KEY ( phoneID ),
+	FOREIGN KEY ( infoID ) REFERENCES GeneralInfo (infoID)
+)ENGINE=INNODB;
+
+CREATE TABLE
+Comment
+(
+	commentID INT NOT NULL AUTO_INCREMENT,
+	infoID INT NOT NULL,
+	postalCode INT NOT NULL,
+	comment VARCHAR(1500) NOT NULL,
+	date DATE NOT NULL,
+	PRIMARY KEY ( commentID ),
+	FOREIGN KEY ( infoID ) REFERENCES GeneralInfo (infoID),
+	FOREIGN KEY ( postalCode ) REFERENCES Community (postalCode)
+)ENGINE=INNODB;
+
+
+CREATE TABLE
+Project
+(
+        projectID INT NOT NULL AUTO_INCREMENT,
+        postalCode INT NOT NULL,
+        applicantName VARCHAR(300) NOT NULL,
+        projectName VARCHAR(300) NOT NULL,
+	projectBlurb VARCHAR(1000) NOT NULL,
+	fundsRequested INT NOT NULL,
+	useOfFunds VARCHAR(1000) NOT NULL,
+        PRIMARY KEY ( projectID ),
+        FOREIGN KEY ( postalCode ) REFERENCES Community (postalCode)
+)ENGINE=INNODB;
+
+CREATE TABLE
+ProjectWebsite
+(
+	websiteID INT NOT NULL AUTO_INCREMENT,
+	projectID INT NOT NULL,
+	siteAddress VARCHAR(300) NOT NULL,
+	PRIMARY KEY ( websiteID ),
+	FOREIGN KEY ( projectID ) REFERENCES Project (projectID)
+)ENGINE=INNODB;
+
+CREATE TABLE
+Ratings
+(
+	ratingID INT NOT NULL AUTO_INCREMENT,
+	projectID INT NOT NULL,
+	infoID INT NOT NULL,
+	rating INT NOT NULL,
+	PRIMARY KEY ( ratingID ),
+        FOREIGN KEY ( projectID ) REFERENCES Project (projectID),
+	FOREIGN KEY ( infoID ) REFERENCES GeneralInfo (infoID)
+)ENGINE=INNODB;
