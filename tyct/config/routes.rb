@@ -1,9 +1,14 @@
 Tyct::Application.routes.draw do
-  devise_for :admins
-  devise_for :users
-  
-  root to: "home#index"
-
+  resources :project_websites, except: [:new, :edit]
+  resources :projects, except: [:new, :edit]
+  resources :ratings, except: [:new, :edit]
+  resources :phone_numbers, except: [:new, :edit]
+  resources :person_infos, except: [:new, :edit]
+  resources :comments, except: [:new, :edit]
+  resources :communities, except: [:new, :edit]
+  resources :contact_infos, except: [:new, :edit]
+  resources :administrators, except: [:new, :edit]
+  resources :users, except: [:new, :edit]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

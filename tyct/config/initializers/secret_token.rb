@@ -16,4 +16,4 @@
 # Using secret_token for rails3 compatibility. Change to secret_key_base
 # to avoid deprecation warning.
 # Can be safely removed in a rails3 api-only application.
-Tyct::Application.config.secret_token = '04deae0406009bcc4988ce9a79727335493a466142e78687f7060dada7679b3cea2aa2f358cb88dc011b9c1dec8c1d79aa68dde171da3b2858f0be939179934b'
+Tyct::Application.config.secret_token = 'a8f1fb8a5395bfb5b2c67624fd75fb7ecbf22b285220d9cef2be790074553cfd2f516b2e3a1787a9d6c4e1422340e206cce2580c292c95d04d83986beae506c6'

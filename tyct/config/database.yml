@@ -8,7 +8,7 @@ development:
   database: ThankYou
   host: localhost
   username: root
-  password: 'gb3itaccount'
+  password: "gb3itaccount"
   pool: 5
   timeout: 5000
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141107003216) do
+ActiveRecord::Schema.define(version: 20141112031423) do
 
   create_table "Administrator", primary_key: "adminID", force: true do |t|
     t.integer "infoID", null: false
@@ -20,10 +20,10 @@ ActiveRecord::Schema.define(version: 20141107003216) do
   add_index "Administrator", ["infoID"], name: "infoID", using: :btree
 
   create_table "Comment", primary_key: "commentID", force: true do |t|
-    t.integer "infoID",                  null: false
-    t.integer "postalCode",              null: false
-    t.string  "comment",    limit: 1500, null: false
-    t.date    "date",                    null: false
+    t.integer   "infoID",                  null: false
+    t.integer   "postalCode",              null: false
+    t.string    "comment",    limit: 1500, null: false
+    t.timestamp "date",                    null: false
   end
 
   add_index "Comment", ["infoID"], name: "infoID", using: :btree
@@ -92,40 +92,54 @@ ActiveRecord::Schema.define(version: 20141107003216) do
   add_index "User", ["contactID"], name: "contactID", using: :btree
   add_index "User", ["infoID"], name: "infoID", using: :btree
 
-  create_table "admins", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+  create_table "administrators", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
-  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
+  create_table "comments", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "communities", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "contact_infos", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "person_infos", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "phone_numbers", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "project_websites", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "projects", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ratings", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

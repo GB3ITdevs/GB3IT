@@ -20,7 +20,7 @@ GeneralInfo
 CREATE TABLE
 Community
 (
-	postalCode INT NOT NULL AUTO_INCREMENT,
+	postalCode INT NOT NULL,
 	communityName VARCHAR(200),
 	PRIMARY KEY ( postalCode )
 )ENGINE=INNODB;
@@ -75,7 +75,7 @@ Comment
 	infoID INT NOT NULL,
 	postalCode INT NOT NULL,
 	comment VARCHAR(1500) NOT NULL,
-	date DATE NOT NULL,
+	date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	PRIMARY KEY ( commentID ),
 	FOREIGN KEY ( infoID ) REFERENCES GeneralInfo (infoID),
 	FOREIGN KEY ( postalCode ) REFERENCES Community (postalCode)
