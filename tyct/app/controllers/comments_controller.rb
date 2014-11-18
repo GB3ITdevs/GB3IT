@@ -1,6 +1,9 @@
 class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
+
+before_filter :set_headers
+
   def index
     @comments = Comment.all
 
@@ -53,4 +56,10 @@ class CommentsController < ApplicationController
     def comment_params(params)
       params.permit(:infoID, :postalCode, :comment)
     end
+
+  def set_headers
+	headers['Access-Control-Allow-Origin'] = '*'
+  end
+
+
 end

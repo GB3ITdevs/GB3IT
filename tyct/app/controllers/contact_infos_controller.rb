@@ -1,6 +1,9 @@
 class ContactInfosController < ApplicationController
   # GET /contact_infos
   # GET /contact_infos.json
+
+before_filter :set_headers
+
   def index
     @contact_infos = ContactInfo.all
 
@@ -53,4 +56,10 @@ class ContactInfosController < ApplicationController
     def contact_info_params(params)
       params.permit(:postalCode, :suburb, :city, :streetNumber, :street)
     end
+
+  def set_headers
+	headers['Access-Control-Allow-Origin'] = '*'
+  end
+
+
 end

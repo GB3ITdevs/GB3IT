@@ -1,6 +1,9 @@
 class PersonInfosController < ApplicationController
   # GET /person_infos
   # GET /person_infos.json
+
+before_filter :set_headers
+
   def index
     @person_infos = PersonInfo.all
 
@@ -53,4 +56,10 @@ class PersonInfosController < ApplicationController
     def person_info_params(params)
       params.permit(:firstName, :lastName, :password, :email)
     end
+
+  def set_headers
+	headers['Access-Control-Allow-Origin'] = '*'
+  end
+
+
 end

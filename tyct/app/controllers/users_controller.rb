@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
+
+before_filter :set_headers
+
   def index
     @users = User.all
 
@@ -10,7 +13,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by_sql("SELECT User.userID, User.infoID, GeneralInfo.firstName, GeneralInfo.lastName, GeneralInfo.email FROM User JOIN GeneralInfo ON User.infoID=GeneralInfo.infoID WHERE User.userID=#{params[:id]}")
 
     render json: @user
   end
@@ -26,6 +29,7 @@ class UsersController < ApplicationController
       render json: @user.errors, status: :unprocessable_entity
     end
   end
+
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
@@ -53,4 +57,10 @@ class UsersController < ApplicationController
     def user_params(params)
       params.permit(:infoID, :contactID)
     end
+
+  def set_headers
+ 	headers['Access-Control-Allow-Origin'] = '*'
+  end
+
+
 end

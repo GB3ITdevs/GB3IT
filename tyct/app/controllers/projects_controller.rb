@@ -1,6 +1,9 @@
 class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
+
+
+
   def index
     @projects = Project.all
 
@@ -53,4 +56,10 @@ class ProjectsController < ApplicationController
     def project_params(params)
       params.permit(:postalCode, :applicantName, :projectName, :projectBlurb, :fundsRequested, :useOfFunds)
     end
+
+  def set_headers
+	headers['Access-Control-Allow-Origin'] = '*'
+  end
+
+
 end

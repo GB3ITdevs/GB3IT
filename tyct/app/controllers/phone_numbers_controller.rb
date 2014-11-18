@@ -1,6 +1,9 @@
 class PhoneNumbersController < ApplicationController
   # GET /phone_numbers
   # GET /phone_numbers.json
+
+before_filter :set_headers
+
   def index
     @phone_numbers = PhoneNumber.all
 
@@ -53,4 +56,10 @@ class PhoneNumbersController < ApplicationController
     def phone_number_params(params)
       params.permit(:infoID, :phoneNumber)
     end
+
+  def set_headers
+  	headers['Access-Control-Allow-Origin'] = '*'
+  end
+
+
 end

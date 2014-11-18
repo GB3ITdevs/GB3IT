@@ -1,6 +1,9 @@
 class RatingsController < ApplicationController
   # GET /ratings
   # GET /ratings.json
+
+before_filter :set_headers
+
   def index
     @ratings = Rating.all
 
@@ -53,4 +56,10 @@ class RatingsController < ApplicationController
     def rating_params(params)
       params.permit(:projectID, :infoID, :rating)
     end
+
+  def set_headers
+	headers['Access-Control-Allow-Origin'] = '*'
+  end
+
+
 end

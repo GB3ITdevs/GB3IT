@@ -1,6 +1,9 @@
 class AdministratorsController < ApplicationController
   # GET /administrators
   # GET /administrators.json
+
+before_filter :set_headers
+
   def index
     @administrators = Administrator.all
 
@@ -53,4 +56,10 @@ class AdministratorsController < ApplicationController
     def administrator_params(params)
       params.permit(:infoID)
     end
+
+  def set_headers
+	headers['Access-Control-Allow-Origin'] = '*'
+  end
+
+
 end

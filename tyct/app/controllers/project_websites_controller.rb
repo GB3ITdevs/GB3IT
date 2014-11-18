@@ -1,6 +1,9 @@
 class ProjectWebsitesController < ApplicationController
   # GET /project_websites
   # GET /project_websites.json
+
+before_filter :set_headers
+
   def index
     @project_websites = ProjectWebsite.all
 
@@ -53,4 +56,10 @@ class ProjectWebsitesController < ApplicationController
     def project_website_params(params)
       params.permit(:projectID, :siteAddress)
     end
+
+  def set_headers
+	headers['Access-Control-Allow-Origin'] = '*'
+  end
+
+
 end

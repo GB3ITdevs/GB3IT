@@ -1,6 +1,9 @@
 class CommunitiesController < ApplicationController
   # GET /communities
   # GET /communities.json
+
+before_filter :set_headers
+
   def index
     @communities = Community.all
 
@@ -53,4 +56,10 @@ class CommunitiesController < ApplicationController
     def community_params(params)
       params.permit(:postalCode, :communityName)
     end
+
+  def set_headers
+	headers['Access-Control-Allow-Origin'] = '*'
+  end
+
+
 end
